@@ -23,29 +23,33 @@
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","version":"8.2.1","exturl":false,"sidebar":{"position":"left","display":"hide","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}};
   </script>
-<meta property="og:type" content="website">
-<meta property="og:title" content="Peter的博客">
-<meta property="og:url" content="http://example.com/index.html">
+<meta name="description" content="包含用于配置游戏进程或引擎行为的属性设置的文本文件。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UE4配置文件解析">
+<meta property="og:url" content="http://example.com/2021/02/20/UE4%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%A7%A3%E6%9E%90/index.html">
 <meta property="og:site_name" content="Peter的博客">
+<meta property="og:description" content="包含用于配置游戏进程或引擎行为的属性设置的文本文件。">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-02-20T01:33:24.000Z">
+<meta property="article:modified_time" content="2021-02-20T02:00:25.776Z">
 <meta property="article:author" content="Peter Lee">
-<meta property="article:tag" content="Peter Blog UE4 C++">
+<meta property="article:tag" content="UE4">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/">
+<link rel="canonical" href="http://example.com/2021/02/20/UE4%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%A7%A3%E6%9E%90/">
 
 
 <script class="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
-<title>Peter的博客</title>
+<title>UE4配置文件解析 | Peter的博客</title>
   
 
 
@@ -139,7 +143,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -152,6 +156,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">基本原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%BC%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text">格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="nav-number">1.2.</span> <span class="nav-text">配置文件结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%98%E5%82%A8%E8%B7%AF%E5%BE%84"><span class="nav-number">1.2.1.</span> <span class="nav-text">存储路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%88%86%E7%B1%BB"><span class="nav-number">1.2.2.</span> <span class="nav-text">配置分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84"><span class="nav-number">1.2.3.</span> <span class="nav-text">文件层次结构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%BB%E5%86%99%E5%8E%9F%E7%90%86"><span class="nav-number">1.3.</span> <span class="nav-text">读写原理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8config"><span class="nav-number">2.</span> <span class="nav-text">如何使用config</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8"><span class="nav-number">2.1.</span> <span class="nav-text">自动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%8B%E5%8A%A8"><span class="nav-number">2.2.</span> <span class="nav-text">手动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%96%87%E4%BB%B6%E5%BB%BA%E7%AB%8B%E5%AF%B9%E5%BA%94%E7%9A%84%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="nav-number">2.3.</span> <span class="nav-text">自定义文件建立对应的文件结构</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -201,16 +206,17 @@
 </noscript>
 
 
-    <div class="main-inner index posts-expand">
+    <div class="main-inner post posts-expand">
 
-    
+
+  
 
 
 <div class="post-block">
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/20/UE4%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%A7%A3%E6%9E%90/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -223,9 +229,9 @@
       <meta itemprop="name" content="Peter的博客">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/02/20/UE4%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%A7%A3%E6%9E%90/" class="post-title-link" itemprop="url">UE4配置文件解析</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          UE4配置文件解析
+        </h1>
 
         <div class="post-meta-container">
           <div class="post-meta">
@@ -258,16 +264,62 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>包含用于配置游戏进程或引擎行为的属性设置的文本文件。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/02/20/UE4%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%A7%A3%E6%9E%90/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
+        <p>包含用于配置游戏进程或引擎行为的属性设置的文本文件。</p>
+<a id="more"></a>
+
+<h1 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h1><h2 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//文件名.ini</span></span><br><span class="line">[Section]<span class="comment">//每个模块的标题即一个Section</span></span><br><span class="line">Key=Value<span class="comment">//可以包含多个Value嵌套</span></span><br></pre></td></tr></table></figure>
+<p>例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[&#x2F;Scrpit&#x2F;ModuleName.ExampleClass]</span><br><span class="line">ExampleVariable&#x3D;0.0f</span><br></pre></td></tr></table></figure>
+<h2 id="配置文件结构"><a href="#配置文件结构" class="headerlink" title="配置文件结构"></a>配置文件结构</h2><h3 id="存储路径"><a href="#存储路径" class="headerlink" title="存储路径"></a>存储路径</h3><p>1.Engine/Config/..</p>
+<p>2.Engine/Saved/Config/.. </p>
+<p>3.[ProjectDirectory]/Config/..</p>
+<p>4.[ProjectDirectory]/Saved/Config/..</p>
+<p>其中，2是引擎运行后生成，4游戏项目运行后生成。</p>
+<h3 id="配置分类"><a href="#配置分类" class="headerlink" title="配置分类"></a>配置分类</h3><ul>
+<li><p>兼容</p>
+</li>
+<li><p>设备概述文件</p>
+</li>
+<li><p>编辑器</p>
+</li>
+<li><p>编辑器游戏未知</p>
+</li>
+<li><p>编辑器键绑定</p>
+</li>
+<li><p>编辑器用户设置</p>
+</li>
+<li><p>引擎</p>
+</li>
+<li><p>游戏</p>
+</li>
+<li><p>输入</p>
+</li>
+<li><p>全局光照</p>
+</li>
+<li><p>可延展性</p>
+</li>
+</ul>
+<p>引擎提供的配置文件类型，这些文件放在不同的文件里面，同样也可以自定义配置文件。</p>
+<h3 id="文件层次结构"><a href="#文件层次结构" class="headerlink" title="文件层次结构"></a>文件层次结构</h3><p>系统将所有特定于项目和特定于平台的差异保存到[ProjectDirectory]/Saved/Config/[Platform]/[Category].ini</p>
+<p>下面的文件层级示例用于配置文件的引擎类别：</p>
+<ol>
+<li>Engine/Config/Base.ini通常为空。</li>
+<li>Engine/Config/BaseEngine.ini</li>
+<li>Engine/Config/[Platform]/base[Platform]Engine.ini</li>
+<li>[ProjectDirectory]/Config/DefaultEngine.ini</li>
+<li>Engine/Config/[Platform]/[Platform]Engine.ini</li>
+<li>[ProjectDirectory]/Config/[Platform]/[Platform]Engine.ini保存目录中的配置文件只存储配置文件堆栈中特定于项目和特定于平台的差异。</li>
+</ol>
+<p>上述层级中，高层级文件内的值会覆盖底层级文件内的值。并且引擎提供的这些基本配置文件的名称是固定的，如果随意删除或修改会导致层级信息的确实。</p>
+<h2 id="读写原理"><a href="#读写原理" class="headerlink" title="读写原理"></a>读写原理</h2><p>引擎中有一个全局的GConfig变量，是一个配置信息存储容器，在运行时会对配置信息进行存储。其中，GConfig由以下属性构成：</p>
+<ol>
+<li>FName 配置文件类型</li>
+<li>SourceIniHierarchy 文件层级结构</li>
+<li>SourceConfigFile 初始化加载的配置</li>
+<li>Dirty 修改标识位，以防写入文件时被重写</li>
+<li>NoSave 是否没有保存</li>
+</ol>
+<h1 id="如何使用config"><a href="#如何使用config" class="headerlink" title="如何使用config"></a>如何使用config</h1><h2 id="自动"><a href="#自动" class="headerlink" title="自动"></a>自动</h2><h2 id="手动"><a href="#手动" class="headerlink" title="手动"></a>手动</h2><h2 id="自定义文件建立对应的文件结构"><a href="#自定义文件建立对应的文件结构" class="headerlink" title="自定义文件建立对应的文件结构"></a>自定义文件建立对应的文件结构</h2>
     </div>
 
     
@@ -275,11 +327,16 @@
     
 
     <footer class="post-footer">
-        <div class="post-eof"></div>
-      
+          <div class="post-tags">
+              <a href="/tags/UE4/" rel="tag"># UE4</a>
+          </div>
+
+        
+
     </footer>
   </article>
 </div>
+
 
 
 
